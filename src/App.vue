@@ -413,9 +413,10 @@ onMounted(() => {
       </Swiper>
       <div class="second__content">
         <p class="anim-second-1 vibe fz36">Дорогие родные и близкие</p>
-        <p class="anim-second-2">
-          Приглашаем вас разделить этот особенный и важный для нас день и стать
-          частью семейной истории
+        <p class="anim-second-2" style="max-width: 300px">
+          Приглашаем вас разделить <br />
+          этот особенный и важный для нас день <br />
+          и стать частью семейной истории
         </p>
         <div class="anim-second-3">
           <table>
@@ -527,7 +528,8 @@ onMounted(() => {
         <img :src="button" alt="" />
       </div>
       <p class="third__content">
-        Историческая усадьба Богдановичей “Двор Стайки”
+        Историческая усадьба Богдановичей
+        <span style="white-space: nowrap">“Двор Стайки”</span>
       </p>
       <button class="third__button" @click="handleClickOpenMap">
         ПОСМОТРЕТЬ НА КАРТЕ
@@ -541,7 +543,7 @@ onMounted(() => {
           <div>
             <p class="vibe1 fz36">14:00</p>
             <b class="fz12 f500">Трансфер до усадьбы</b>
-            <p class="fz12">г. Минск ДС Дружная</p>
+            <p class="fz12">г. Минск <br />ДС Дружная</p>
           </div>
         </div>
         <div class="fourth__grid_div_2">
@@ -584,10 +586,12 @@ onMounted(() => {
       <div class="fifth__content">
         <p class="anim-fifth-1 vibe fz50">Дресс-код</p>
         <p class="anim-fifth-2">
-          Мы будем признательны, если вы придержитесь цветовой гаммы
+          Мы будем признательны, <br />
+          если вы придержитесь <br />
+          цветовой гаммы
         </p>
         <div class="fifth__border anim-fifth-3"></div>
-        <p class="f700 anim-fifth-4">TOTAL BLACK</p>
+        <p class="f500 anim-fifth-4">TOTAL BLACK</p>
       </div>
 
       <Swiper
@@ -627,8 +631,9 @@ onMounted(() => {
       </Swiper>
       <div class="fifth__content anim-fifth-5">
         <p>
-          Чтобы было удобнее, мы собрали примеры образов, которые помогут вам
-          вдохновиться и выбрать наряд
+          Чтобы было удобнее, мы собрали примеры <br />
+          образов, которые помогут вам вдохновиться <br />
+          и выбрать наряд
         </p>
       </div>
     </div>
@@ -636,18 +641,21 @@ onMounted(() => {
       <p class="vibe1 fz70 anims-six-1">Details</p>
       <div class="six__convert anims-six-2">
         <p class="six__convert-text">
-          Мы не хотим обременять вас выбором подарка, поэтому будем рады вкладу
+          Мы не хотим обременять <br />
+          вас выбором подарка, <br />
+          поэтому будем рады вкладу <br />
           в бюджет нашей молодой семьи
         </p>
         <img :src="convert" alt="" />
       </div>
-      <div class="six__content anims-six-3">
+      <div class="six__content anims-six-3" style="margin-top: -50px">
         <p>
-          Для вашего удобства мы организуем трансфер до места торжества.
-          Трансфер будет на месте за 10 минут до отправления по адресу ДС
-          Дружная.
+          Для вашего удобства мы организуем <br />
+          трансфер до места торжества. <br />
+          Трансфер будет на месте за 10 минут <br />
+          до отправления по адресу ДС Дружная.
         </p>
-        <p>
+        <p style="margin-top: 10px; margin-bottom: 20px">
           Если Вы планируете воспользоваться этой услугой - сообщите пожалуйства
           об этом нам
         </p>
@@ -656,8 +664,9 @@ onMounted(() => {
         <div class="six__ramka">
           <img :src="bant" alt="" />
           <p class="anims-six-4-text">
-            Мы старались сделать праздник незабываемым, поэтому будем рады, если
-            Вы подтвердите свое присутствие на торжестве
+            Мы старались сделать праздник незабываемым, <br />
+            поэтому будем рады, если Вы подтвердите свое <br />
+            присутствие на торжестве
             <b class="f700" :style="{ whiteSpace: 'nowrap' }"
               >до 01 июня 2026</b
             >
@@ -666,8 +675,9 @@ onMounted(() => {
       </div>
       <div class="six__content anims-six-5">
         <p>
-          Вступайте в наш общий <b class="f700">телеграмм</b> канал Там мы будем
-          делиться впечатлениями, эмоциями, фото и видео
+          Вступайте в наш общий <b class="f700">телеграмм</b> канал <br />
+          Там мы будем делиться впечатлениями, <br />
+          эмоциями, фото и видео
         </p>
       </div>
       <button class="six__button" @click="handleClickChat">
@@ -684,8 +694,10 @@ onMounted(() => {
       <div class="seven__content">
         <p class="seven__content-contacts vibe fz50">Контакты</p>
         <p class="seven__content-contacts-text seven__content-text">
-          Если у вас возникли вопросы по мероприятию или вы подготовили
-          творческий сюрприз - обращайтесь к нашему
+          Если у вас возникли вопросы по <br />
+          мероприятию или вы подготовили <br />
+          творческий сюрприз - обращайтесь <br />
+          к нашему
           <b class="f700">организатору Евгении</b>
         </p>
       </div>
@@ -1001,7 +1013,7 @@ onMounted(() => {
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  padding: 120px 5%;
+  padding: 80px 5% 120px;
 
   * {
     color: var(--color-text);
@@ -1014,6 +1026,9 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
 
     & > div {
+      display: flex;
+      align-items: center;
+
       & > div {
         padding: 12px;
       }
@@ -1046,12 +1061,16 @@ onMounted(() => {
 }
 
 .fifth {
-  padding: 120px 0;
+  padding: 60px 0 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 10px;
+
+  * {
+    color: var(--color-text-secondary);
+  }
 
   &__border {
     border-left: 1px solid var(--color-text-secondary);
@@ -1087,7 +1106,7 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   color: var(--color-text);
-  padding: 80px 0 120px;
+  padding: 80px 0 60px;
 
   &__content {
     padding: 0 40px;
@@ -1100,7 +1119,9 @@ onMounted(() => {
   }
 
   &__ramka {
-    padding: 80px 20px 20px;
+    padding: 70px 20px 20px;
+    font-size: 14px;
+    font-weight: 500;
     position: relative;
     img {
       top: -35px;
@@ -1130,17 +1151,18 @@ onMounted(() => {
     max-width: 50%;
     text-align: center;
     left: 24%;
-    max-width: 160px;
-    top: 32%;
+    max-width: 180px;
+    top: 33%;
     color: #350609;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 12px;
     rotate: -22deg;
   }
 
   &__button {
-    padding: 6px 24px;
-    border-radius: 12px;
+    padding: 6px 40px;
+    margin-top: -30px;
+    border-radius: 50px;
     background-color: transparent;
     color: var(--color-text);
     border: 1px solid var(--color-text);
@@ -1214,9 +1236,10 @@ onMounted(() => {
   &__content-text1 {
     margin-right: auto;
     font-size: min(50px, 12vw);
+    margin-top: -30px;
   }
   &__content-text2 {
-    margin-top: -30px;
+    margin-top: -10px;
     margin-left: 30%;
     font-size: min(50px, 12vw);
   }
@@ -1241,10 +1264,13 @@ onMounted(() => {
   }
 
   &__content-contacts {
+    margin-top: 10px;
     font-size: min(50px, 12vw);
   }
 
   &__content-contacts-text {
+    margin-top: 10px;
+    text-align: center;
     font-size: min(16px, 3vw);
     max-width: min(60%, 60vw);
     padding-bottom: 20%;
@@ -1252,7 +1278,7 @@ onMounted(() => {
 }
 
 .anims-six-1 {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.2);
   align-self: flex-end;
   padding-right: 50px;
   margin-bottom: -50px;

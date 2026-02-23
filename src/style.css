@@ -92,11 +92,13 @@ body::-webkit-scrollbar {
   font-family: "Great Vibes", cursive;
   font-weight: 400;
   font-style: normal;
+  line-height: 100%;
 }
 .vibe {
   font-family: Imperial;
   font-weight: 400;
   font-style: normal;
+  line-height: 100%;
 }
 .fz12 {
   font-size: 12px;
