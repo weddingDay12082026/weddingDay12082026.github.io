@@ -19,7 +19,6 @@ import banket from "./assets/banket.webp";
 import black1 from "./assets/black1.webp";
 import black2 from "./assets/black2.webp";
 import black3 from "./assets/black3.webp";
-import video from "./assets/video.webm";
 import convert from "./assets/convert.webp";
 import bant from "./assets/bant.webp";
 import hand from "./assets/hand.webp";
@@ -73,6 +72,16 @@ const startAnimations = () => {
     ".anim-second-4",
   ];
 
+  const buttons = [".third__button", ".six__button", ".seven__button"];
+
+  gsap.to(buttons, {
+    repeat: -1,
+    yoyo: true,
+    scale: 1.1,
+    duration: 1,
+    ease: "sine.inOut",
+  });
+
   animsSecond.forEach((elem) => {
     gsap.fromTo(
       elem,
@@ -125,6 +134,7 @@ const startAnimations = () => {
         start: "-5px bottom",
         end: "bottom start",
       },
+      duration: 1,
       x: index % 2 ? 100 : -100,
       ease: "back.out(1.2)",
       alpha: 0,
@@ -226,6 +236,14 @@ const startAnimations = () => {
         },
       );
     }
+  });
+
+  gsap.to(".second__lystra", {
+    rotate: 10,
+    ease: "sine.inOut",
+    duration: 2,
+    yoyo: true,
+    repeat: -1,
   });
 
   gsap.from(".seven__hand", {
@@ -353,6 +371,10 @@ onMounted(() => {
 </script>
 
 <template>
+  <div v-if="!isLoaded" class="loader-wrapper">
+    <span class="loader"></span>
+    <p>Загружаем приглашение</p>
+  </div>
   <div class="main" :class="{ main_loaded: !isLoaded }">
     <div class="main__container first">
       <!-- <img :src="start" alt="" /> -->
@@ -369,7 +391,7 @@ onMounted(() => {
         ref="videoRef"
         @pause="handleClickStop"
       >
-        <source :src="video" type="video/webm" />
+        <source src="./assets/video.webm" type="video/webm" />
       </video>
       <p class="kirill first__text fz70 vibe">Кирилл</p>
       <p class="liza first__text fz70 vibe">Елизавета</p>
@@ -660,7 +682,7 @@ onMounted(() => {
           об этом нам
         </p>
       </div>
-      <div class="six__content anims-six-4">
+      <div class="six__content anims-six-4" style="padding: 0 5px; width: 100%">
         <div class="six__ramka">
           <img :src="bant" alt="" />
           <p class="anims-six-4-text">
@@ -714,6 +736,52 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.loader-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  p {
+    color: var(--color-text);
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid var(--color-text);
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-bottom: 4px solid var(--color-text-secondary);
+  border-left: 4px solid transparent;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -751,6 +819,9 @@ onMounted(() => {
     position: relative;
     &:nth-child(odd) {
       background-color: var(--color-bg-secondary);
+    }
+    &:first-child {
+      background-color: var(--color-bg);
     }
 
     &::after {
@@ -904,7 +975,9 @@ onMounted(() => {
 
   &__lystra {
     position: absolute;
-    top: 0;
+    transform-origin: top center;
+    rotate: -10deg;
+    top: -10px;
     left: 50%;
     transform: translate(-50%);
   }
@@ -967,6 +1040,7 @@ onMounted(() => {
   }
 
   padding-top: 80px;
+  padding-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -990,7 +1064,10 @@ onMounted(() => {
   &__button {
     background-color: #350609;
     color: white;
-    padding: 6px 12px;
+    padding: 10px 24px;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 13px;
     border-radius: 20px;
     cursor: pointer;
     transition: scale 0.25s ease-in-out;
@@ -998,7 +1075,6 @@ onMounted(() => {
       scale: 0.95;
     }
   }
-  padding-bottom: 120px;
 }
 
 .swiper-2 {
@@ -1119,7 +1195,7 @@ onMounted(() => {
   }
 
   &__ramka {
-    padding: 70px 20px 20px;
+    padding: 70px 5% 5%;
     font-size: 14px;
     font-weight: 500;
     position: relative;
@@ -1152,11 +1228,12 @@ onMounted(() => {
     text-align: center;
     left: 24%;
     max-width: 180px;
-    top: 33%;
+    top: 35%;
     color: #350609;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 11px;
     rotate: -22deg;
+    line-height: 100%;
   }
 
   &__button {
@@ -1220,7 +1297,7 @@ onMounted(() => {
   &__end2 {
     width: 100%;
     height: auto;
-    max-height: 90%;
+    max-height: 95%;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1248,7 +1325,7 @@ onMounted(() => {
     padding: 4px 16px;
     border: 1px solid var(--color-text-secondary);
     position: absolute;
-    left: 58px;
+    left: 25%;
     bottom: 115px;
     border-radius: 16px;
     rotate: 28deg;
@@ -1257,10 +1334,6 @@ onMounted(() => {
 
     transition: scale 0.25s ease-in-out;
     z-index: 4;
-
-    &:hover {
-      scale: 0.95;
-    }
   }
 
   &__content-contacts {
@@ -1271,7 +1344,7 @@ onMounted(() => {
   &__content-contacts-text {
     margin-top: 10px;
     text-align: center;
-    font-size: min(16px, 3vw);
+    font-size: min(15px, 3.2vw);
     max-width: min(60%, 60vw);
     padding-bottom: 20%;
   }
