@@ -130,7 +130,7 @@ const startAnimations = () => {
       scrollTrigger: {
         trigger: elem,
         toggleActions: "restart none none none",
-        start: "start 70px",
+        start: "-20px bottom",
         end: "bottom start",
         markers: true,
       },
