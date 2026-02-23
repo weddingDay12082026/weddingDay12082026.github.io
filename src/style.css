@@ -75,14 +75,14 @@ body::-webkit-scrollbar {
 }
 
 .mont {
-  font-family: "Montserrat", serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   letter-spacing: -0.5px;
 }
 
 * {
-  font-family: "Montserrat", serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   letter-spacing: -0.5px;

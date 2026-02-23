@@ -179,34 +179,52 @@ const startAnimations = () => {
         type: "words, chars",
       });
 
+      gsap.fromTo(
+        elem,
+        { y: 20 },
+        {
+          scrollTrigger: {
+            trigger: elem,
+
+            endTrigger: elem,
+            start: "270px bottom",
+          },
+          y: 0,
+          alpha: 1,
+
+          onStart: () => {
+            gsap.from(split.chars, {
+              duration: 1,
+              y: 50, // animate from 100px below
+              autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
+              stagger: 0.05, // 0.05 seconds between each
+            });
+          },
+        },
+      );
+
       // now animate the characters in a staggered fashion
-      gsap.from(split.chars, {
-        scrollTrigger: {
-          trigger: ".anims-six-4-text",
-
-          endTrigger: ".anims-six-4-text",
-          start: "-220px bottom",
-          end: "bottom start",
-        },
-
-        duration: 1,
-        y: 50, // animate from 100px below
-        autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
-        stagger: 0.03, // 0.05 seconds between each
-      });
     } else {
-      gsap.from(elem, {
-        scrollTrigger: {
-          trigger: elem,
-
-          endTrigger: elem,
-          toggleActions: "restart none none none",
-          start: "-20px bottom",
-          end: "bottom start",
+      gsap.fromTo(
+        elem,
+        {
+          y: 20,
+          scrollTrigger: {
+            trigger: elem,
+            toggleActions: "restart none none none",
+            start: "start bottom",
+          },
         },
-        y: 20,
-        alpha: 0,
-      });
+        {
+          scrollTrigger: {
+            trigger: elem,
+            toggleActions: "restart none none none",
+            start: "start bottom",
+          },
+          y: 0,
+          alpha: 1,
+        },
+      );
     }
   });
 
@@ -337,12 +355,16 @@ onMounted(() => {
 <template>
   <div class="main" :class="{ main_loaded: !isLoaded }">
     <div class="main__container first">
-      <img :src="start" alt="" />
-      <img :src="button_play" alt="" @click="handleClickPlay" />
+      <!-- <img :src="start" alt="" /> -->
+      <!-- <img :src="button_play" alt="" @click="handleClickPlay" /> -->
       <video
         class="video"
         :class="{ video_play: play }"
         preload
+        autoplay
+        loop
+        muted
+        playsinline
         id="video"
         ref="videoRef"
         @pause="handleClickStop"
@@ -364,9 +386,6 @@ onMounted(() => {
         :spaceBetween="5"
         :loop="isLoaded"
       >
-        <SwiperSlide>
-          <img class="swiper-img" :src="photo1" alt="" />
-        </SwiperSlide>
         <SwiperSlide>
           <img class="swiper-img center" :src="photo2" alt="" />
         </SwiperSlide>
@@ -582,9 +601,6 @@ onMounted(() => {
         centered-slides
       >
         <SwiperSlide>
-          <img class="swiper-img" :src="black1" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
           <img class="swiper-img center" :src="black2" alt="" />
         </SwiperSlide>
         <SwiperSlide>
@@ -757,8 +773,8 @@ onMounted(() => {
   .video {
     width: 100%;
     height: auto;
-    opacity: 0;
-    z-index: -1;
+    // opacity: 0;
+    // z-index: -1;
     transition: all 0.25s ease-in-out;
     position: relative;
 
@@ -1102,16 +1118,23 @@ onMounted(() => {
     position: relative;
     margin-bottom: -30px;
     margin-top: -60px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__convert-text {
     position: absolute;
     max-width: 50%;
-    left: 20%;
-    top: 30%;
+    text-align: center;
+    left: 24%;
+    max-width: 160px;
+    top: 32%;
     color: #350609;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     rotate: -22deg;
   }
 
@@ -1202,7 +1225,7 @@ onMounted(() => {
     padding: 4px 16px;
     border: 1px solid var(--color-text-secondary);
     position: absolute;
-    left: 52px;
+    left: 58px;
     bottom: 115px;
     border-radius: 16px;
     rotate: 28deg;
@@ -1228,6 +1251,19 @@ onMounted(() => {
   }
 }
 
+.anims-six-1 {
+  color: rgba(255, 255, 255, 0.5);
+  align-self: flex-end;
+  padding-right: 50px;
+  margin-bottom: -50px;
+}
+
+.anims-six-1,
+.anims-six-2,
+.anims-six-3,
+.anims-six-4,
+.anims-six-5,
+.anims-six-6,
 .anim-second-1,
 .anim-second-2,
 .anim-second-3,
