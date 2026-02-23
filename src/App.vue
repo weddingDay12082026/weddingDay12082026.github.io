@@ -129,9 +129,10 @@ const startAnimations = () => {
     gsap.from(elem, {
       scrollTrigger: {
         trigger: elem,
-        endTrigger: elem,
         toggleActions: "restart none none none",
-        start: "bottom",
+        start: "start 70px",
+        end: "bottom start",
+        markers: true,
       },
       duration: 1.5,
       x: index % 2 ? 100 : -100,
