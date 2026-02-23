@@ -132,7 +132,6 @@ const startAnimations = () => {
         toggleActions: "restart none none none",
         start: "-20px bottom",
         end: "bottom start",
-        markers: true,
       },
       duration: 1.5,
       x: index % 2 ? 100 : -100,
