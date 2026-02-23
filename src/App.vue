@@ -19,6 +19,7 @@ import banket from "./assets/banket.webp";
 import black1 from "./assets/black1.webp";
 import black2 from "./assets/black2.webp";
 import black3 from "./assets/black3.webp";
+import video from "./assets/video.webm";
 import convert from "./assets/convert.webp";
 import bant from "./assets/bant.webp";
 import hand from "./assets/hand.webp";
@@ -32,7 +33,6 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 
-const video = ref(null);
 const init = ref(false);
 const windowWidth = ref(1920);
 const mobile = computed(() => windowWidth.value <= 425);
@@ -229,46 +229,28 @@ const startAnimations = () => {
   ScrollTrigger.refresh();
 };
 
-watch(video, () => {
-  const loader = document.getElementById("loader");
-  const video = document.getElementById("video");
+// watch(video, () => {
+//   const loader = document.getElementById("loader");
+//   const video = document.getElementById("video");
 
-  // Показываем лоудер при загрузке видео
-  video.addEventListener("loadstart", () => {
-    loader.style.display = "block";
-  });
+//   // Показываем лоудер при загрузке видео
+//   video.addEventListener("loadstart", () => {
+//     loader.style.display = "block";
+//   });
 
-  // Скрываем лоудер, когда видео загружено
-  video.addEventListener("canplaythrough", () => {
-    loader.style.display = "none";
-  });
+//   // Скрываем лоудер, когда видео загружено
+//   video.addEventListener("canplaythrough", () => {
+//     loader.style.display = "none";
+//   });
 
-  // Скрываем лоудер, если произошла ошибка
-  video.addEventListener("error", () => {
-    loader.style.display = "none";
-    alert("Ошибка загрузки видео. Вы можете запросить видео у Сабины!");
-  });
-});
+//   // Скрываем лоудер, если произошла ошибка
+//   video.addEventListener("error", () => {
+//     loader.style.display = "none";
+//     alert("Ошибка загрузки видео. Вы можете запросить видео у Сабины!");
+//   });
+// });
 
-const handleClickByVideo = () => {
-  const myVideo = video.value;
-  if (myVideo.paused) {
-    if (myVideo.requestFullscreen) {
-      myVideo.requestFullscreen();
-    } else if (myVideo.msRequestFullscreen) {
-      myVideo.msRequestFullscreen();
-    } else if (myVideo.mozRequestFullScreen) {
-      myVideo.mozRequestFullScreen();
-    } else if (myVideo.webkitRequestFullScreen) {
-      myVideo.webkitRequestFullScreen();
-    } else if (video.webkitEnterFullScreen) {
-      myVideo.webkitEnterFullScreen();
-    }
-    myVideo.play();
-  } else {
-    myVideo.pause();
-  }
-};
+const handleClickByVideo = () => {};
 
 const handleClickOpenMap = () => {
   window.open(
@@ -303,6 +285,36 @@ const updateSwipers = () => {
   });
 };
 
+const play = ref(false);
+const videoRef = ref(null);
+
+const handleClickStop = () => {
+  play.value = false;
+};
+
+const handleClickPlay = () => {
+  play.value = true;
+
+  const myVideo = videoRef.value;
+
+  if (myVideo.paused) {
+    // if (myVideo.requestFullscreen) {
+    //   myVideo.requestFullscreen();
+    // } else if (myVideo.msRequestFullscreen) {
+    //   myVideo.msRequestFullscreen();
+    // } else if (myVideo.mozRequestFullScreen) {
+    //   myVideo.mozRequestFullScreen();
+    // } else if (myVideo.webkitRequestFullScreen) {
+    //   myVideo.webkitRequestFullScreen();
+    // } else if (video.webkitEnterFullScreen) {
+    //   myVideo.webkitEnterFullScreen();
+    // }
+    myVideo.play();
+  } else {
+    myVideo.pause();
+  }
+};
+
 onMounted(() => {
   if (document.readyState === "complete") {
     isLoaded.value = true;
@@ -326,7 +338,17 @@ onMounted(() => {
   <div class="main" :class="{ main_loaded: !isLoaded }">
     <div class="main__container first">
       <img :src="start" alt="" />
-      <img :src="button_play" alt="" />
+      <img :src="button_play" alt="" @click="handleClickPlay" />
+      <video
+        class="video"
+        :class="{ video_play: play }"
+        preload
+        id="video"
+        ref="videoRef"
+        @pause="handleClickStop"
+      >
+        <source :src="video" type="video/webm" />
+      </video>
       <p class="kirill first__text fz70 vibe">Кирилл</p>
       <p class="liza first__text fz70 vibe">Елизавета</p>
     </div>
@@ -715,7 +737,7 @@ onMounted(() => {
       background-repeat: no-repeat;
       background-size: contain;
       bottom: 0;
-      z-index: 1;
+      z-index: 2;
       margin-bottom: -21%;
       rotate: 2deg;
     }
@@ -731,6 +753,20 @@ onMounted(() => {
 
 .first {
   position: relative;
+
+  .video {
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.25s ease-in-out;
+    position: relative;
+
+    &_play {
+      opacity: 1;
+      z-index: 2;
+    }
+  }
 
   &__text {
     position: absolute;
@@ -750,9 +786,14 @@ onMounted(() => {
   }
 
   img:first-child {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
     filter: blur(1.5px) brightness(0.6);
+    position: absolute;
+    left: 50%;
+    object-position: center center;
+    transform: translateX(-50%);
+    object-fit: cover;
   }
   img:nth-child(2) {
     object-fit: contain;
