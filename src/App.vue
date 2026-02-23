@@ -1369,4 +1369,8 @@ onMounted(() => {
 .anim-second-4 {
   opacity: 0;
 }
+
+button {
+  white-space: nowrap;
+}
 </style>
