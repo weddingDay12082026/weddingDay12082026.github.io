@@ -1372,4 +1372,10 @@ onMounted(() => {
 button {
   white-space: nowrap;
 }
+
+.third__button,
+.six__button,
+.seven__button {
+  z-index: 999;
+}
 </style>
