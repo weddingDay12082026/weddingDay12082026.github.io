@@ -662,10 +662,10 @@ onMounted(() => {
       <p class="vibe1 fz70 anims-six-1">Details</p>
       <div class="six__convert anims-six-2">
         <p class="six__convert-text">
-          Мы не хотим обременять <br />
-          вас выбором подарка, <br />
-          поэтому будем рады вкладу <br />
-          в бюджет нашей молодой семьи
+          Если вы планировали взять с собой <br />
+          букет цветов, то бутылочка алкоголя <br />
+          с вашей подписью будет лучшей заменой, <br />
+          так как мы не успеем насладиться красотой цветов
         </p>
         <img :src="convert" alt="" />
       </div>
@@ -1223,11 +1223,10 @@ onMounted(() => {
 
   &__convert-text {
     position: absolute;
-    max-width: 50%;
     text-align: center;
-    left: 24%;
-    max-width: 180px;
-    top: 35%;
+    left: 18%;
+    max-width: 200px;
+    top: 33%;
     color: #350609;
     font-weight: 400;
     font-size: 11px;
