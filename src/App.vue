@@ -32,6 +32,35 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 
+const userHasScrolled = ref(false);
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 10) {
+    userHasScrolled.value = true;
+  }
+});
+
+const hasScrolledAfterFirstPlay = ref(false);
+
+const secondRef = ref(null);
+
+const handleVideoProgress = () => {
+  const videoEl = videoRef.value;
+  const mainEl = document.querySelector(".main");
+
+  if (!videoEl || !mainEl) return;
+  if (hasScrolledAfterFirstPlay.value) return;
+  if (userHasScrolled.value) return;
+
+  if (videoEl.duration - videoEl.currentTime < 0.3) {
+    secondRef.value.scrollIntoView({
+      behavior: "smooth",
+    });
+
+    hasScrolledAfterFirstPlay.value = true;
+  }
+};
+
 const init = ref(false);
 const windowWidth = ref(1920);
 const mobile = computed(() => windowWidth.value <= 425);
@@ -388,6 +417,7 @@ onMounted(() => {
         playsinline
         id="video"
         ref="videoRef"
+        @timeupdate="handleVideoProgress"
         @pause="handleClickStop"
       >
         <source src="./assets/video.webm" type="video/webm" />
@@ -395,7 +425,7 @@ onMounted(() => {
       <p class="kirill first__text fz70 vibe">Кирилл</p>
       <p class="liza first__text fz70 vibe">Елизавета</p>
     </div>
-    <div class="main__container second">
+    <div class="main__container second" ref="secondRef">
       <img class="second__lystra" :src="lystra" alt="" />
       <Swiper
         v-if="isLoaded"
