@@ -44,23 +44,6 @@ const hasScrolledAfterFirstPlay = ref(false);
 
 const secondRef = ref(null);
 
-const handleVideoProgress = () => {
-  const videoEl = videoRef.value;
-  const mainEl = document.querySelector(".main");
-
-  if (!videoEl || !mainEl) return;
-  if (hasScrolledAfterFirstPlay.value) return;
-  if (userHasScrolled.value) return;
-
-  if (videoEl.duration - videoEl.currentTime < 0.3) {
-    secondRef.value.scrollIntoView({
-      behavior: "smooth",
-    });
-
-    hasScrolledAfterFirstPlay.value = true;
-  }
-};
-
 const init = ref(false);
 const windowWidth = ref(1920);
 const mobile = computed(() => windowWidth.value <= 425);
@@ -417,7 +400,6 @@ onMounted(() => {
         playsinline
         id="video"
         ref="videoRef"
-        @timeupdate="handleVideoProgress"
         @pause="handleClickStop"
       >
         <source src="./assets/video.webm" type="video/webm" />
